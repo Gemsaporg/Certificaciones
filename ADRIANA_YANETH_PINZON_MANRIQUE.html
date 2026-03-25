@@ -2,43 +2,518 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificado Aprobado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Diploma Oficial - Manipulación Higiénica de Alimentos y BPM</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0e4b32 0%, #1f6e4a 40%, #2a8b5c 100%);
+            font-family: 'Times New Roman', 'Georgia', 'Palatino', 'Segoe UI', serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            padding: 2rem;
+            position: relative;
         }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        /* Fondo con textura de pergamino sutil */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.1"><path fill="none" d="M30 10 L190 10 M30 190 L190 190 M10 30 L10 190 M190 30 L190 190" stroke="%23ffffff" stroke-width="1.5"/><circle cx="100" cy="100" r="40" stroke="%23ffffff" fill="none" stroke-width="1"/></svg>');
+            background-repeat: repeat;
+            background-size: 40px;
+            pointer-events: none;
+        }
+
+        /* Marco principal estilo diploma antiguo */
+        .diploma-container {
+            max-width: 950px;
+            width: 100%;
+            background: #FFFEF7;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px #d4af7a, 0 0 0 8px #f3e9ce, 0 0 0 10px #c4a35a;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        /* Decoración dorada en esquinas */
+        .diploma-container::before,
+        .diploma-container::after {
+            content: "✧";
+            position: absolute;
+            font-size: 2rem;
+            color: #c4a747;
+            opacity: 0.6;
+            font-family: serif;
+        }
+
+        .diploma-container::before {
+            top: -5px;
+            left: -5px;
+            transform: rotate(-15deg);
+        }
+
+        .diploma-container::after {
+            bottom: -5px;
+            right: -5px;
+            transform: rotate(15deg);
+        }
+
+        /* Contenido interior */
+        .diploma-content {
+            padding: 3rem 3rem 2.8rem;
+            background: linear-gradient(to bottom, #fffdf5, #fff9ea);
+            border: 2px solid #e6d5a8;
+            margin: 12px;
+            position: relative;
+        }
+
+        /* Escudo / sello superior */
+        .diploma-seal {
             text-align: center;
+            margin-bottom: 0.8rem;
         }
-        h1 {
-            color: #4CAF50;
+
+        .seal-icon {
+            font-size: 2.8rem;
+            color: #b8860b;
+            letter-spacing: 8px;
         }
-        p {
-            font-size: 16px;
-            color: #333;
+
+        /* Título principal */
+        .diploma-title {
+            text-align: center;
+            border-bottom: 2px solid #d4af37;
+            border-top: 2px solid #d4af37;
+            padding: 0.8rem 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .diploma-title h1 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #2c5a42;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .diploma-title h2 {
+            font-size: 1rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            color: #7a5a3a;
+            margin-top: 0.3rem;
+        }
+
+        /* Texto de otorgamiento */
+        .award-text {
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #2c3e2b;
+            margin: 1.8rem 0 1rem;
+            font-style: italic;
+        }
+
+        .recipient-name {
+            text-align: center;
+            margin: 1.2rem 0;
+        }
+
+        .recipient-name .name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 2px;
+            color: #1f543e;
+            border-bottom: 1px dashed #cbb26a;
+            display: inline-block;
+            padding: 0 1rem 0.3rem;
+            text-transform: uppercase;
+        }
+
+        .recipient-doc {
+            text-align: center;
+            font-size: 1rem;
+            color: #5a4a2a;
+            margin-top: 0.3rem;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        /* Descripción del curso */
+        .course-description {
+            text-align: center;
+            margin: 1.8rem 0 1rem;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #3e5d4a;
+        }
+
+        .course-name {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #2a6b4a;
+            background: #f9f2df;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            border: 1px solid #decb94;
+        }
+
+        .course-wrapper {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Detalles de vigencia y datos */
+        .details-grid {
+            background: #fdf8ed;
+            margin: 2rem 0 1.5rem;
+            padding: 1.2rem 2rem;
+            border-left: 5px solid #c2a144;
+            border-right: 5px solid #c2a144;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 3rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .detail-item {
+            text-align: center;
+            min-width: 180px;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8b6b3c;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f543e;
+            border-bottom: 1px dotted #d6bc7a;
+            display: inline-block;
+            padding: 0 0.2rem;
+        }
+
+        .validity-badge {
+            background: #e9e1cf;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            color: #2c5a42;
+            display: inline-block;
+            margin-top: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Firma y sello oficial - con firmas en negro */
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .signature-line {
+            text-align: center;
+            flex: 1;
+        }
+
+        .signature-container {
+            width: 220px;
+            margin: 0 auto;
+        }
+
+        .signature-line-custom {
+            border-top: 1.5px solid #000000;
+            width: 100%;
+            padding-top: 0.4rem;
+            margin: 0 auto;
+        }
+
+        .signature-name {
+            font-size: 0.9rem;
+            font-family: 'Courier New', 'Bradley Hand', 'Segoe Script', cursive;
+            color: #000000;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .signature-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7c5d32;
+            margin-top: 0.3rem;
+        }
+
+        .signature-sub {
+            font-size: 0.65rem;
+            color: #7a5d32;
+            margin-top: 0.2rem;
+        }
+
+        .official-stamp {
+            text-align: center;
+            flex: 0.8;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .stamp-circle {
+            border: 2px solid #b47c2e;
+            border-radius: 50%;
+            width: 85px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: #fef7e6;
+            color: #b47c2e;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .stamp-circle span:first-child {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Número de registro */
+        .registration-number {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: #aa8b54;
+            font-family: monospace;
+            border-top: 1px solid #e7dbbc;
+            padding-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Pie de página decorativo */
+        .diploma-footer {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+            color: #9c7e4a;
+            font-family: monospace;
+        }
+
+        /* Líneas decorativas */
+        .ornament {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #cdb27a;
+            letter-spacing: 6px;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 680px) {
+            .diploma-content {
+                padding: 1.5rem;
+            }
+            .recipient-name .name {
+                font-size: 1.4rem;
+            }
+            .course-name {
+                font-size: 1.1rem;
+                padding: 0.2rem 1rem;
+            }
+            .details-grid {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            .signature-area {
+                flex-direction: column;
+                align-items: center;
+            }
+            .signature-line {
+                width: 100%;
+            }
+            .signature-container {
+                width: 200px;
+            }
+            .diploma-title h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animación suave al aparecer */
+        .diploma-container {
+            animation: fadeInUp 0.7s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* detalles extra dorados */
+        .gold-dots {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* Estilo para las firmas manuscritas */
+        .firma-manuscrita {
+            font-family: 'Segoe Script', 'Bradley Hand', 'Lucida Handwriting', cursive;
+            font-size: 0.95rem;
+            font-weight: normal;
+            color: #000000;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Certificado Aprobado</h1>
-        <p><strong>Nombre:</strong> Eduin Fabian Pineda Villanueva</p>
-        <p><strong>Número de Documento:</strong> 79.901.904</p>
-        <p><strong>Curso:</strong> Manipulación Higiénica de Alimentos y BPM</p>
-        <p><strong>Válido Hasta:</strong> 24/03/2027</p>
-        <p><strong>Contacto:</strong> WhatsApp 3123717519</p>
+
+<div class="diploma-container">
+    <div class="diploma-content">
+        <div class="gold-dots"></div>
+        
+        <div class="diploma-seal">
+            <div class="seal-icon">✤ ✤ ✤</div>
+        </div>
+
+        <div class="diploma-title">
+            <h1>DIPLOMA</h1>
+            <h2>DE APROBACIÓN Y CERTIFICACIÓN</h2>
+        </div>
+
+        <div class="award-text">
+            Por medio del presente se certifica que
+        </div>
+
+        <div class="recipient-name">
+            <div class="name">EDUIN FABIAN PINEDA VILLANUEVA</div>
+            <div class="recipient-doc">C.C. N° 79.901.904</div>
+        </div>
+
+        <div class="award-text">
+            ha aprobado satisfactoriamente el programa de formación en
+        </div>
+
+        <div class="course-wrapper">
+            <div class="course-name">
+                MANIPULACIÓN HIGIÉNICA DE ALIMENTOS Y BUENAS PRÁCTICAS DE MANUFACTURA (BPM)
+            </div>
+        </div>
+
+        <div class="course-description">
+            conforme a la normativa sanitaria vigente, demostrando competencias en inocuidad alimentaria, higiene y manejo seguro de alimentos.
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">FECHA DE EXPEDICIÓN</div>
+                <div class="detail-value">25 de marzo de 2026</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">VIGENCIA</div>
+                <div class="detail-value">
+                    <span class="validity-badge">1 AÑO</span>
+                    <div style="font-size: 0.9rem; margin-top: 5px;">Hasta: 25 de marzo de 2027</div>
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">CÓDIGO DEL DIPLOMA</div>
+                <div class="detail-value">DIP-BPM-79901904-2026</div>
+            </div>
+        </div>
+
+        <div class="signature-area">
+            <div class="signature-line">
+                <div class="signature-container">
+                    <div class="signature-line-custom"></div>
+                    <div class="signature-name firma-manuscrita">Dr. Ricardo Mendoza S.</div>
+                    <div class="signature-title">DIRECTOR TÉCNICO</div>
+                    <div class="signature-sub">Reg. INVIMA 4782</div>
+                </div>
+            </div>
+            <div class="official-stamp">
+                <div class="stamp-circle">
+                    <span>✧</span>
+                    <span>CERTIFICADO</span>
+                    <span>OFICIAL</span>
+                    <span>✧</span>
+                </div>
+                <div class="signature-title" style="margin-top:6px;">SELLO DE VALIDEZ</div>
+            </div>
+            <div class="signature-line">
+                <div class="signature-container">
+                    <div class="signature-line-custom"></div>
+                    <div class="signature-name firma-manuscrita">Esp. María Fernanda Lozano</div>
+                    <div class="signature-title">COORDINADOR ACADÉMICO</div>
+                    <div class="signature-sub">Certificación Académica</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ornament">
+            ✦ ✦ ✦
+        </div>
+
+        <div class="registration-number">
+            REGISTRO NACIONAL DE CERTIFICACIÓN: 1102-2026-COL-ALI-4598 | RESOLUCIÓN 2674 DE 2013
+        </div>
+        
+        <div class="diploma-footer">
+            Este diploma acredita la formación en Manipulación Higiénica de Alimentos y BPM con una vigencia de 1 año.
+            Documento de carácter oficial, válido en todo el territorio nacional.
+        </div>
     </div>
+</div>
+
+<!-- Decoración sutil de hojas verdes alrededor -->
+<div style="position:fixed; bottom:15px; left:20px; opacity:0.2; pointer-events:none; font-size:55px;">🌿</div>
+<div style="position:fixed; top:20px; right:25px; opacity:0.15; pointer-events:none; font-size:70px; transform:rotate(20deg);">🍃</div>
+<div style="position:fixed; bottom:50px; right:40px; opacity:0.15; pointer-events:none; font-size:48px;">🌱</div>
+
 </body>
 </html>
